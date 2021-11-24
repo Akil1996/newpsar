@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            word-wrap: break-word;
+            font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Ubuntu,sans-serif;
+        }
+        
+        .navbar {
+            overflow: hidden;
+            background-color: #5469d4;
+        }
+
+        .navbar a {
+            float: left;
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+        .dropdown .dropbtn {
+            font-size: 16px;  
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color:#617af3;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .input-container{
+            background-color: #c9ddf3;
+            display: grid;
+            grid-template-columns: .5fr .5fr .5fr .5fr .5fr;
+            grid-gap: 1em;
+            grid-auto-rows: minmax(100px, auto);
+            margin: 5px;
+            border: 1px solid rgb(175, 174, 250);
+            border-radius: 1em;
+        }
+        .input-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        input{
+            background-color: #FFFFFF;
+            border: none;
+            outline: none;
+            text-align:center;
+            margin: .5em .5em;
+            min-height: 44px;
+            border-radius: 5px;
+            width: 15em;
+        }
+        select{
+            background-color: #FFFFFF;
+            border: none;
+            outline: none;
+            text-align:center;
+            margin: .5em .5em;
+            min-height: 44px;
+            border-radius: 5px;
+            width: 15em;
+        }
+        label{
+            margin: .5em .5em;
+        }
+        button{
+            padding: 1em;
+            background-color: #415ce2;
+            border: #5469d4;
+            color: #e7eef7;
+            border-radius: .5em;
+            
+        }
+        button:hover {
+            background-color: #2b48db;
+        }
+        input:hover{
+            background-color: #fafcd4;
+        }
+        option { background-color: #cfd470;
+            color: #357b1d !important; }
+            select:focus > option:checked { 
+            background: #000 !important;
+        }
+        /* Style the tab */
+        .tab {
+          overflow: hidden;
+          border: 1px solid #ccc;
+          background-color:grey;
+        }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+          background-color: inherit;
+          float: left;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          padding: 14px 16px;
+          transition: 0.3s;
+          font-size: 17px;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+          background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+          background-color: #ccc;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+          display: none;
+          padding: 6px 12px;
+          border: 1px solid #ccc;
+          border-top: none;
+        }
+        table {
+          border: 1px solid #ccc;
+          border-collapse: collapse;
+          margin: 0;
+          padding: 0;
+          width: 100%;
+          table-layout: fixed;
+        }
+
+        table caption {
+          font-size: 1.5em;
+          margin: .5em 0 .75em;
+        }
+
+        table tr {
+          background-color: #f8f8f8;
+          border: 1px solid #ddd;
+          padding: .35em;
+        }
+
+        table th,
+        table td {
+          padding: .625em;
+          text-align: center;
+        }
+
+        table th {
+          font-size: .85em;
+          letter-spacing: .1em;
+          text-transform: uppercase;
+        }
+
+        @media screen and (max-width: 600px) {
+          table {
+            border: 0;
+          }
+
+          table caption {
+            font-size: 1.3em;
+          }
+
+          table thead {
+            border: none;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+          }
+
+          table tr {
+            border-bottom: 3px solid #ddd;
+            display: block;
+            margin-bottom: .625em;
+          }
+
+          table td {
+            border-bottom: 1px solid #ddd;
+            display: block;
+            font-size: .8em;
+            text-align: right;
+          }
+
+          table td::before {
+            /*
+            * aria-label has no advantage, it won't be read inside a table
+            content: attr(aria-label);
+            */
+            content: attr(data-label);
+            float: left;
+            font-weight: bold;
+            text-transform: uppercase;
+          }
+
+          table td:last-child {
+            border-bottom: 0;
+          }
+        }
+
+
+        /* general styling */
+        body {
+          font-family: "Open Sans", sans-serif;
+          line-height: 1.25;
+        }
+        .trade-buy{
+            background-color: #d5fcd4;
+        }
+        .trade-sell{
+            background-color: #ffb8b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar start -->
+    <div class="navbar">
+        <a href="#">HOME</a>
+        <a class="navbar-a" href="#">JYOTISH MAPS</a>
+        
+    </div>
+    <!-- Navbar Ends -->
+    <!-- SECTION A STARTS -->
+        <form method="post">
+            {% csrf_token %}
+            <div class="input-container">
+                <div class="input-section">
+                    <label for="symbol">Symbol   </label>
+                    <input type="text" id="symbol" value="TSLA" name="symbol"><br><br>
+                </div>
+                <div class="input-section">
+                    <label for="timeFrame">TimeFrame</label>
+                    <select name="timeFrame" id="timeFrame">
+                        <option value="day" selected>Day</option>
+                        <option value="week">Week</option>
+                        <option value="month">Month</option>
+                    </select>
+                </div>
+                <div class="input-section">
+                    <label for="fdate">From Date</label>
+                    <input type="date" id="fdate" value="2021-11-01" name="fdate"><br><br>
+                </div>
+                <div class="input-section">
+                    <label for="tdate">To Date</label>
+                    <input type="date" id="tdate" value="2021-11-24" name="tdate"><br><br>
+                </div>
+
+                <div class="input-section">
+                    <button>Submit</button>
+                </div>
+            </div>
+        </form>
+    <!-- SECTION A ENDS -->
+    <!-- SECTION B STARTS -->
+        {% if data %}
+        <div class="tab">
+          <button class="tablinks" onclick="openCity(event, 'London')">Data Feed</button>
+          <button class="tablinks" onclick="openCity(event, 'Paris')">PL Report</button>
+        </div>
+
+        <div id="London" class="tabcontent">
+
+            <table>
+                <caption>Data Feed</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Date time</th>
+                        <th scope="col">Open</th>
+                        <th scope="col">High</th>
+                        <th scope="col">Low</th>
+                        <th scope="col">Close</th>
+                        <th scope="col">Signal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data %}
+                    <tr>
+                        <td data-label="Date time">{{i.dtime}}</td>
+                        <td data-label="Open">{{i.open}}</td>
+                        <td data-label="High">{{i.high}}</td>
+                        <td data-label="Low">{{i.low}}</td>
+                        <td data-label="Close">{{i.close}}</td>
+                        {% if i.signal == "BUY" %}
+                            <td class="trade-buy" data-label="Signal">{{i.signal}}</td>
+                        {% else %}
+                            <td class="trade-sell" data-label="Signal">{{i.signal}}</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+              </tbody>
+            </table>
+        </div>
+
+        <div id="Paris" class="tabcontent">
+            <table>
+                <caption>PL Report</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Entry Time</th>
+                        <th scope="col">Exit Time</th>
+                        <th scope="col">Entry Price</th>
+                        <th scope="col">Exit Price</th>
+                        <th scope="col">High</th>
+                        <th scope="col">Low</th>
+                        <th scope="col">PL</th>
+                        <th scope="col">PL%</th>
+                        <th scope="col">Signal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in df %}
+                    <tr>
+                        <td data-label="Entry Time">{{i.entryTime}}</td>
+                        <td data-label="Exit Time">{{i.exitTime}}</td>
+                        <td data-label="Entry Price">{{i.entryPrice}}</td>
+                        <td data-label="Exit Price">{{i.exitPrice}}</td>
+                        <td data-label="High">{{i.high}}</td>
+                        <td data-label="Low">{{i.low}}</td>
+                        <td data-label="Low">{{i.profit}}</td>
+                        <td data-label="Low">{{i.profitPercentage}}</td>
+                        {% if i.signal == "BUY" %}
+                            <td class="trade-buy" data-label="Signal">{{i.signal}}</td>
+                        {% else %}
+                            <td class="trade-sell" data-label="Signal">{{i.signal}}</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+              </tbody>
+            </table>
+        </div>
+
+        <div id="Tokyo" class="tabcontent">
+          <h3>Tokyo</h3>
+          <p>Tokyo is the capital of Japan.</p>
+        </div>
+        {% endif %}
+    <!-- SECTION B ENDS -->
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
+</body>
+</html>
