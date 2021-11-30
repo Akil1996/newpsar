@@ -43,7 +43,7 @@ def psar_profitloss_strategy(stockName, df, fund):
     return result
 
 
-def plreport_main(symbol, fdate, tdate, fund):
+def plreport_main(symbol, fdate, tdate, fund, srtValue, incrementValue, maxValue):
     fromDate = dt.datetime.strptime(fdate, "%Y-%m-%d").date()
     sliceDate = str(fromDate - dt.timedelta(days=100))
     data = yf.download(tickers= symbol, period="ytd", interval="1d", start=sliceDate, end=tdate, group_by='ticker',
@@ -52,13 +52,13 @@ def plreport_main(symbol, fdate, tdate, fund):
     data.columns = ["dtime", "open", "high", "low", "close", "ac", "volume"]
     df = pd.DataFrame(data)
     df.set_index("dtime", inplace=True)
-    df['SAR']= talib.SAREXT(df.high, df.low, startvalue=0, offsetonreverse=0, accelerationinitlong=0.02, accelerationlong=0.02,
-                      accelerationmaxlong=0.20, accelerationinitshort=0.02, accelerationshort=0.02, accelerationmaxshort=0.20)
+    df["SAR"] = talib.SAREXT(df.high, df.low, startvalue=srtValue, offsetonreverse=0, accelerationinitlong=incrementValue, accelerationlong=incrementValue,
+                  accelerationmaxlong=maxValue, accelerationinitshort=incrementValue, accelerationshort=incrementValue, accelerationmaxshort=maxValue)
     df = df.loc[fdate:tdate]
     df = psar_profitloss_strategy(symbol, df, fund)
     return df
 
-def plreport_month_main(symbol, fdate, tdate, fund):
+def plreport_month_main(symbol, fdate, tdate, fund, srtValue, incrementValue, maxValue):
     fromDate = dt.datetime.strptime(fdate, "%Y-%m-%d").date()
     sliceDate = str(fromDate - dt.timedelta(days=1000))
     data = yf.download(tickers= symbol, period="ytd", interval="1mo", start=sliceDate, end=tdate, group_by='ticker',
@@ -67,13 +67,13 @@ def plreport_month_main(symbol, fdate, tdate, fund):
     data.columns = ["dtime", "open", "high", "low", "close", "ac", "volume"]
     df = pd.DataFrame(data)
     df.set_index("dtime", inplace=True)
-    df['SAR']= talib.SAREXT(df.high, df.low, startvalue=0, offsetonreverse=0, accelerationinitlong=0.02, accelerationlong=0.02,
-                      accelerationmaxlong=0.20, accelerationinitshort=0.02, accelerationshort=0.02, accelerationmaxshort=0.20)
+    df["SAR"] = talib.SAREXT(df.high, df.low, startvalue=srtValue, offsetonreverse=0, accelerationinitlong=incrementValue, accelerationlong=incrementValue,
+                  accelerationmaxlong=maxValue, accelerationinitshort=incrementValue, accelerationshort=incrementValue, accelerationmaxshort=maxValue)
     df = df.loc[fdate:tdate]
     df = psar_profitloss_strategy(symbol, df, fund)
     return df
 
-def plreport_week_main(symbol, fdate, tdate, fund):
+def plreport_week_main(symbol, fdate, tdate, fund, srtValue, incrementValue, maxValue):
     fromDate = dt.datetime.strptime(fdate, "%Y-%m-%d").date()
     sliceDate = str(fromDate - dt.timedelta(days=1000))
     data = yf.download(tickers= symbol, period="ytd", interval="1wk", start=sliceDate, end=tdate, group_by='ticker',
@@ -82,8 +82,8 @@ def plreport_week_main(symbol, fdate, tdate, fund):
     data.columns = ["dtime", "open", "high", "low", "close", "ac", "volume"]
     df = pd.DataFrame(data)
     df.set_index("dtime", inplace=True)
-    df['SAR']= talib.SAREXT(df.high, df.low, startvalue=0, offsetonreverse=0, accelerationinitlong=0.02, accelerationlong=0.02,
-                      accelerationmaxlong=0.20, accelerationinitshort=0.02, accelerationshort=0.02, accelerationmaxshort=0.20)
+    df["SAR"] = talib.SAREXT(df.high, df.low, startvalue=srtValue, offsetonreverse=0, accelerationinitlong=incrementValue, accelerationlong=incrementValue,
+                  accelerationmaxlong=maxValue, accelerationinitshort=incrementValue, accelerationshort=incrementValue, accelerationmaxshort=maxValue)
     df = df.loc[fdate:tdate]
     df = psar_profitloss_strategy(symbol, df, fund)
     return df

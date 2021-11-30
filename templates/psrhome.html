@@ -76,7 +76,7 @@
         .input-container{
             background-color: #c9ddf3;
             display: grid;
-            grid-template-columns: .5fr .5fr .5fr .5fr .5fr;
+            grid-template-columns: .4fr .4fr .4fr .4fr .4fr .4fr;
             grid-gap: 1em;
             grid-auto-rows: minmax(100px, auto);
             margin: 5px;
@@ -274,8 +274,14 @@
             <div class="input-container">
                 <div class="input-section">
                     <label for="symbol">Symbol   </label>
-                    <input type="text" id="symbol" name="symbol"><br><br>
+                    <input  type="text" id="symbol" name="symbol"><br><br>
                 </div>
+                <div class="input-section">
+                  <label for="pvalues">PSAR Value</label>
+                  <input type="text" style="width: 45px;" id="startValue" name="startValue"><br><br>
+                  <input type="text" style="width: 45px;" id="incrementValue" name="incrementValue"><br><br>
+                  <input type="text" style="width: 45px;" id="maxValue" name="maxValue"><br><br>
+              </div>
                 <div class="input-section">
                     <label for="timeFrame">TimeFrame</label>
                     <select name="timeFrame" id="timeFrame">
